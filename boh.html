@@ -1,0 +1,1665 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Andy Stone Design SRL - Piatră Decorativă</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* RESET & GENERAL STYLES */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        section {
+            padding: 100px 0;
+            position: relative;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            position: relative;
+            color: #333;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, #c8a97e, #a67c52);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        /* HEADER STYLES */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            background-color: transparent;
+        }
+
+        header.scrolled {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            padding: 15px 0;
+            transition: all 0.3s ease;
+        }
+
+        .logo {
+            height: 120px;
+            transition: all 0.3s ease;
+        }
+
+        header.scrolled .logo {
+            height: 80px;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0.8rem 0;
+            border-top: 1px solid rgba(200, 169, 126, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: #333;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: all 0.3s ease;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #c8a97e, #a67c52);
+            bottom: 0;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+
+        /* HERO SECTION */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('logo.jpg') center/cover no-repeat;
+            text-align: center;
+            color: white;
+            padding-top: 150px;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            opacity: 0;
+            transform: translateY(50px);
+            animation: fadeInUp 1s forwards 0.5s;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            background: linear-gradient(90deg, #c8a97e, #a67c52);
+            color: white;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(166, 124, 82, 0.4);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(166, 124, 82, 0.6);
+        }
+
+        /* ABOUT SECTION */
+        .about {
+            background-color: white;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-image {
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            transform: translateX(-100px);
+            opacity: 0;
+            transition: all 1s ease;
+        }
+
+        .about-image.active {
+            transform: translateX(0);
+            opacity: 1;
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            transition: transform 0.5s ease;
+        }
+
+        .about-image:hover img {
+            transform: scale(1.05);
+        }
+
+        .about-text {
+            transform: translateX(100px);
+            opacity: 0;
+            transition: all 1s ease;
+        }
+
+        .about-text.active {
+            transform: translateX(0);
+            opacity: 1;
+        }
+
+        .about-text h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: #333;
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+            color: #666;
+        }
+
+        .values-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .value-item {
+            flex: 1 1 200px;
+            text-align: center;
+            padding: 1.5rem;
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .value-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .value-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #c8a97e;
+        }
+
+        .value-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        /* PRODUCTS SECTION */
+        .products {
+            background-color: #f8f9fa;
+            overflow: hidden;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .product-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transform: translateY(50px);
+            opacity: 0;
+            transition: all 0.5s ease;
+            cursor: pointer;
+        }
+
+        .product-card.active {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .product-image {
+            height: 250px;
+            overflow: hidden;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.1);
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .product-description {
+            color: #666;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .product-tag {
+            display: inline-block;
+            background: linear-gradient(90deg, #c8a97e, #a67c52);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        /* GALLERY SECTION */
+        .gallery {
+            background-color: white;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .gallery-item {
+            border-radius: 10px;
+            overflow: hidden;
+            height: 250px;
+            position: relative;
+            transform: scale(0.9);
+            opacity: 0;
+            transition: all 0.5s ease;
+        }
+
+        .gallery-item.active {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+            display: flex;
+            align-items: flex-end;
+            padding: 1.5rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-caption {
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+
+        /* TESTIMONIALS SECTION */
+        .testimonials {
+            background-color: #f8f9fa;
+        }
+
+        .testimonials-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .testimonials-track {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .testimonial {
+            min-width: 100%;
+            padding: 0 1rem;
+            opacity: 0;
+            transform: scale(0.9);
+            transition: all 0.5s ease;
+        }
+
+        .testimonial.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .testimonial-card {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .testimonial-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .testimonial-text::before, .testimonial-text::after {
+            content: '"';
+            font-size: 3rem;
+            color: #c8a97e;
+            position: absolute;
+            opacity: 0.3;
+        }
+
+        .testimonial-text::before {
+            top: -20px;
+            left: -10px;
+        }
+
+        .testimonial-text::after {
+            bottom: -40px;
+            right: -10px;
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-top: 1rem;
+        }
+
+        .testimonial-role {
+            color: #888;
+            margin-top: 0.3rem;
+        }
+
+        .testimonial-buttons {
+            display: flex;
+            justify-content: center;
+            margin-top: 2rem;
+            gap: 1rem;
+        }
+
+        .testimonial-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #c8a97e;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .testimonial-btn:hover {
+            color: #a67c52;
+            transform: scale(1.1);
+        }
+
+        .testimonial-dots {
+            display: flex;
+            justify-content: center;
+            margin-top: 1.5rem;
+            gap: 0.5rem;
+        }
+
+        .testimonial-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #ddd;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .testimonial-dot.active {
+            background-color: #c8a97e;
+            transform: scale(1.3);
+        }
+
+        /* CONTACT SECTION */
+        .contact {
+            background-color: white;
+        }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .contact-info {
+            transform: translateX(-100px);
+            opacity: 0;
+            transition: all 1s ease;
+        }
+
+        .contact-info.active {
+            transform: translateX(0);
+            opacity: 1;
+        }
+
+        .contact-title {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: #333;
+        }
+
+        .contact-text {
+            margin-bottom: 2rem;
+            line-height: 1.8;
+            color: #666;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-icon {
+            font-size: 1.5rem;
+            color: #c8a97e;
+            margin-right: 1rem;
+        }
+
+        .contact-details {
+            flex: 1;
+        }
+
+        .contact-label {
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+
+        .contact-value {
+            color: #666;
+        }
+
+        .contact-form {
+            background-color: #f8f9fa;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transform: translateX(100px);
+            opacity: 0;
+            transition: all 1s ease;
+        }
+
+        .contact-form.active {
+            transform: translateX(0);
+            opacity: 1;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #c8a97e;
+            box-shadow: 0 0 0 3px rgba(200, 169, 126, 0.3);
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        /* FOOTER */
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 4rem 0 2rem;
+        }
+
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+        }
+
+        .footer-logo {
+            height: 80px;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-text {
+            color: #aaa;
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background-color: #c8a97e;
+            transform: translateY(-5px);
+        }
+
+        .footer-title {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.8rem;
+        }
+
+        .footer-title::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 3px;
+            background: #c8a97e;
+            bottom: 0;
+            left: 0;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-link {
+            margin-bottom: 1rem;
+        }
+
+        .footer-link a {
+            color: #aaa;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-link a:hover {
+            color: #c8a97e;
+            padding-left: 5px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 3rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #777;
+            font-size: 0.9rem;
+        }
+
+        /* ANIMATIONS */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* RESPONSIVE DESIGN */
+        @media (max-width: 992px) {
+            .about-content, .contact-container {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .about-image, .about-text, .contact-info, .contact-form {
+                transform: translateX(0);
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .logo {
+                height: 80px;
+            }
+
+            nav {
+                padding: 1rem 0;
+                position: relative;
+            }
+
+            nav ul {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                flex-direction: column;
+                align-items: center;
+                gap: 0;
+                background-color: white;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+                padding: 1rem 0;
+                border-radius: 0 0 10px 10px;
+                transform: translateY(-20px);
+                opacity: 0;
+                pointer-events: none;
+                transition: all 0.3s ease;
+                z-index: 1000;
+            }
+
+            nav ul.show {
+                transform: translateY(0);
+                opacity: 1;
+                pointer-events: auto;
+            }
+
+            nav ul li {
+                width: 100%;
+                text-align: center;
+            }
+
+            nav a {
+                display: block;
+                padding: 1rem 0;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+                position: absolute;
+                right: 1rem;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+
+            .hero h1 {
+                font-size: 2.3rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .product-card {
+                max-width: 350px;
+                margin: 0 auto;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .values-list {
+                flex-direction: column;
+            }
+
+            .value-item {
+                flex: auto;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* PRELOADER */
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: white;
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .preloader-spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #c8a97e;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* BACK TO TOP BUTTON */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: #c8a97e;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2rem;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s ease;
+            z-index: 900;
+            cursor: pointer;
+        }
+
+        .back-to-top.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            background-color: #a67c52;
+        }
+
+        /* MODAL */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s ease;
+        }
+
+        .modal.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            max-width: 800px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            transform: scale(0.9);
+            transition: all 0.3s ease;
+        }
+
+        .modal.show .modal-content {
+            transform: scale(1);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .modal-close:hover {
+            transform: rotate(90deg);
+        }
+
+        .modal-header {
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-title {
+            font-size: 1.8rem;
+            color: #333;
+        }
+
+        .modal-body {
+            color: #666;
+            line-height: 1.8;
+        }
+
+        .modal-footer {
+            margin-top: 2rem;
+            display: flex;
+            justify-content: flex-end;
+        }
+    </style>
+</head>
+<body>
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="preloader-spinner"></div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        
+        <nav>
+            <div class="container">
+                <ul>
+                    <li><a href="#home">Acasă</a></li>
+                    <li><a href="#about">Despre Noi</a></li>
+                    <li><a href="#products">Produse</a></li>
+                    <li><a href="#gallery">Galerie</a></li>
+                    <li><a href="#testimonials">Testimoniale</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <div class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Andy Stone Design SRL</h1>
+                <p>Specialiști în fabricarea și instalarea pietrei decorative de cea mai înaltă calitate în România. Transformăm spațiile obișnuite în opere de artă durabile.</p>
+                <a href="#products" class="btn">Descoperă Produsele Noastre</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">Despre Noi</h2>
+            <div class="about-content">
+                <div class="about-image">
+                    <img src="/api/placeholder/600/400" alt="Andy Stone Design Factory">
+                </div>
+                <div class="about-text">
+                    <h2>O Tradiție în Excelență</h2>
+                    <p>Andy Stone Design este o companie românească specializată în producerea pietrei decorative de cea mai înaltă calitate. Cu o experiență de peste 15 ani în domeniu, ne-am dedicat perfecționării tehnicilor de fabricație pentru a oferi produse care îmbină estetica cu durabilitatea.</p>
+                    <p>Folosim doar materiale premium și tehnologii inovatoare pentru a crea pietre decorative care transformă orice spațiu într-un mediu elegant și sofisticat. Fiecare piatră este fabricată cu atenție la detalii și pasiune pentru meșteșug.</p>
+                    <h3>Valorile Noastre</h3>
+                    <div class="values-list">
+                        <div class="value-item">
+                            <div class="value-icon">
+                                <i class="fas fa-medal"></i>
+                            </div>
+                            <div class="value-title">Calitate</div>
+                            <p>Produse de cea mai înaltă calitate fără compromisuri.</p>
+                        </div>
+                        <div class="value-item">
+                            <div class="value-icon">
+                                <i class="fas fa-lightbulb"></i>
+                            </div>
+                            <div class="value-title">Inovație</div>
+                            <p>În permanentă căutare de noi tehnologii și design-uri.</p>
+                        </div>
+                        <div class="value-item">
+                            <div class="value-icon">
+                                <i class="fas fa-handshake"></i>
+                            </div>
+                            <div class="value-title">Încredere</div>
+                            <p>Relații de lungă durată bazate pe profesionalism.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products" class="products">
+        <div class="container">
+            <h2 class="section-title">Produsele Noastre</h2>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="/api/placeholder/400/300" alt="Piatră Decorativă Clasică">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Piatră Decorativă Clasică</h3>
+                        <p class="product-description">Soluții elegante și tradiționale pentru interioare și exterioare, potrivite pentru orice stil arhitectural.</p>
+                        <span class="product-tag">Bestseller</span>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="/api/placeholder/400/300" alt="Piatră Decorativă Modernă">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Piatră Decorativă Modernă</h3>
+                        <p class="product-description">Design contemporan cu linii curate și finisaje minimaliste, perfecte pentru spații moderne.</p>
+                        <span class="product-tag">Nou</span>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="/api/placeholder/400/300" alt="Piatră Decorativă Rustică">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Piatră Decorativă Rustică</h3>
+                        <p class="product-description">Aspect natural și textură autentică, ideală pentru crearea unei atmosfere calde și primitoare.</p>
+                        <span class="product-tag">Popular</span>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="/api/placeholder/400/300" alt="Placare Decorativă Premium">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Placare Decorativă Premium</h3>
+                        <p class="product-description">Soluții exclusive de placare pentru proiecte de lux, cu finisaje și culori personalizate.</p>
+                        <span class="product-tag">Premium</span>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="/api/placeholder/400/300" alt="Piatră Decorativă Exterioară">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Piatră Decorativă Exterioară</h3>
+                        <p class="product-description">Rezistentă la intemperii și la variații de temperatură, perfectă pentru fațade și grădini.</p>
+                        <span class="product-tag">Rezistentă</span>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="/api/placeholder/400/300" alt="Elemente Decorative Custom">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Elemente Decorative Custom</h3>
+                        <p class="product-description">Creații personalizate după specificațiile clientului, pentru proiecte unice și distinctive.</p>
+                        <span class="product-tag">Personalizat</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="gallery">
+        <div class="container">
+            <h2 class="section-title">Galerie de Proiecte</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="/api/placeholder/400/300" alt="Proiect 1">
+                    <div class="gallery-overlay">
+                        <div class="gallery-caption">Vilă Rezidențială București</div>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="/api/placeholder/400/300" alt="Proiect 2">
+                    <div class="gallery-overlay">
+                        <div class="gallery-caption">Hotel Boutique Cluj-Napoca</div>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="/api/placeholder/400/300" alt="Proiect 3">
+                    <div class="gallery-overlay">
+                        <div class="gallery-caption">Restaurant Timișoara</div>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="/api/placeholder/400/300" alt="Proiect 4">
+                    <div class="gallery-overlay">
+                        <div class="gallery-caption">Complex Rezidențial Brașov</div>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="/api/placeholder/400/300" alt="Proiect 5">
+                    <div class="gallery-overlay">
+                        <div class="gallery-caption">Centru Comercial Constanța</div>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="/api/placeholder/400/300" alt="Proiect 6">
+                    <div class="gallery-overlay">
+                        <div class="gallery-caption">Clădire de Birouri Iași</div>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="/api/placeholder/400/300" alt="Proiect 7">
+                    <div class="gallery-overlay">
+                        <div class="gallery-caption">Amenajare Grădină Sibiu</div>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="/api/placeholder/400/300" alt="Proiect 8">
+                    <div class="gallery-overlay">
+                        <div class="gallery-caption">Showroom Craiova</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="testimonials">
+        <div class="container">
+            <h2 class="section-title">Ce Spun Clienții Noștri</h2>
+            <div class="testimonials-container">
+                <div class="testimonials-track">
+                    <div class="testimonial">
+                        <div class="testimonial-card">
+                            <div class="testimonial-text">
+                                Andy Stone Design a transformat complet fațada vilei noastre. Calitatea pietrei decorative este excepțională, iar echipa de montaj a fost foarte profesionistă. Recomand cu încredere serviciile lor oricui dorește un rezultat spectaculos și durabil.
+                            </div>
+                            <div class="testimonial-author">Alexandru Popescu</div>
+                            <div class="testimonial-role">Proprietar Vilă, București</div>
+                        </div>
+                    </div>
+                    <div class="testimonial">
+                        <div class="testimonial-card">
+                            <div class="testimonial-text">
+                                Colaborarea cu Andy Stone Design pentru renovarea restaurantului nostru a fost o experiență excelentă. Au înțeles perfect viziunea noastră și au oferit soluții personalizate care au impresionat toți clienții. Materialele sunt de cea mai bună calitate și aspectul final depășește așteptările.
+                            </div>
+                            <div class="testimonial-author">Maria Ionescu</div>
+                            <div class="testimonial-role">Manager Restaurant, Cluj-Napoca</div>
+                        </div>
+                    </div>
+                    <div class="testimonial">
+                        <div class="testimonial-card">
+                            <div class="testimonial-text">
+                                Ca arhitect, am colaborat cu Andy Stone Design pentru mai multe proiecte importante. Apreciez atenția lor la detalii, flexibilitatea și capacitatea de a livra produse personalizate la timp. Sunt parteneri de încredere care înțeleg nevoile proiectelor arhitecturale complexe.
+                            </div>
+                            <div class="testimonial-author">Cristian Dumitrescu</div>
+                            <div class="testimonial-role">Arhitect, Studio Arhitectură</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-buttons">
+                    <button class="testimonial-btn prev-testimonial">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="testimonial-btn next-testimonial">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+                <div class="testimonial-dots">
+                    <div class="testimonial-dot active" data-index="0"></div>
+                    <div class="testimonial-dot" data-index="1"></div>
+                    <div class="testimonial-dot" data-index="2"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Contactează-ne</h2>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3 class="contact-title">Informații de Contact</h3>
+                    <p class="contact-text">Suntem aici pentru a răspunde la orice întrebare. Nu ezitați să ne contactați pentru oferte personalizate, informații suplimentare sau programarea unei vizite la showroom.</p>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-details">
+                            <div class="contact-label">Adresă</div>
+                            <div class="contact-value">Str. Industriilor nr. 15, București, România</div>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="contact-details">
+                            <div class="contact-label">Telefon</div>
+                            <div class="contact-value">+40 721 234 567</div>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-details">
+                            <div class="contact-label">Email</div>
+                            <div class="contact-value">contact@andystonedesign.ro</div>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="contact-details">
+                            <div class="contact-label">Program</div>
+                            <div class="contact-value">Luni - Vineri: 9:00 - 18:00<br>Sâmbătă: 10:00 - 15:00</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name" class="form-label">Nume</label>
+                            <input type="text" id="name" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" id="email" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone" class="form-label">Telefon</label>
+                            <input type="tel" id="phone" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="subject" class="form-label">Subiect</label>
+                            <input type="text" id="subject" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message" class="form-label">Mesaj</label>
+                            <textarea id="message" class="form-control" required></textarea>
+                        </div>
+                        <button type="submit" class="btn">Trimite Mesajul</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div>
+                    <img src="/api/placeholder/200/80" alt="Andy Stone Design Logo" class="footer-logo">
+                    <p class="footer-text">Andy Stone Design SRL este lider în industria pietrei decorative din România, oferind soluții premium pentru proiecte rezidențiale și comerciale.</p>
+                    <div class="footer-social">
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-pinterest-p"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="footer-title">Navigație Rapidă</h3>
+                    <ul class="footer-links">
+                        <li class="footer-link"><a href="#home">Acasă</a></li>
+                        <li class="footer-link"><a href="#about">Despre Noi</a></li>
+                        <li class="footer-link"><a href="#products">Produse</a></li>
+                        <li class="footer-link"><a href="#gallery">Galerie</a></li>
+                        <li class="footer-link"><a href="#testimonials">Testimoniale</a></li>
+                        <li class="footer-link"><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="footer-title">Servicii</h3>
+                    <ul class="footer-links">
+                        <li class="footer-link"><a href="#">Consultanță Design</a></li>
+                        <li class="footer-link"><a href="#">Instalare Profesională</a></li>
+                        <li class="footer-link"><a href="#">Proiecte Personalizate</a></li>
+                        <li class="footer-link"><a href="#">Mentenanță și Întreținere</a></li>
+                        <li class="footer-link"><a href="#">Renovări și Restaurări</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="footer-title">Newsletter</h3>
+                    <p class="footer-text">Abonează-te pentru a primi noutăți despre produsele și ofertele noastre speciale.</p>
+                    <form class="footer-newsletter">
+                        <div class="form-group">
+                            <input type="email" placeholder="Adresa ta de email" class="form-control">
+                        </div>
+                        <button type="submit" class="btn">Abonează-te</button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Andy Stone Design SRL. Toate drepturile rezervate.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back To Top Button -->
+    <div class="back-to-top">
+        <i class="fas fa-chevron-up"></i>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal" id="productModal">
+        <button class="modal-close"><i class="fas fa-times"></i></button>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Titlu Produs</h2>
+            </div>
+            <div class="modal-body">
+                <p>Descriere detaliată a produsului va apărea aici...</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn">Solicită Ofertă</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Wait for DOM to be fully loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Remove preloader
+            setTimeout(() => {
+                document.querySelector('.preloader').style.opacity = '0';
+                setTimeout(() => {
+                    document.querySelector('.preloader').style.display = 'none';
+                }, 500);
+            }, 1000);
+
+            // Header scroll effect
+            const header = document.querySelector('header');
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 100) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+
+            // Mobile menu toggle
+            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+            const navMenu = document.querySelector('nav ul');
+            
+            mobileMenuBtn.addEventListener('click', function() {
+                navMenu.classList.toggle('show');
+            });
+
+            // Close mobile menu when clicking a link
+            document.querySelectorAll('nav a').forEach(link => {
+                link.addEventListener('click', function() {
+                    navMenu.classList.remove('show');
+                });
+            });
+
+            // Scroll animations
+            const scrollElements = document.querySelectorAll('.about-image, .about-text, .product-card, .gallery-item, .testimonial, .contact-info, .contact-form');
+            
+            const elementInView = (el, dividend = 1) => {
+                const elementTop = el.getBoundingClientRect().top;
+                return (
+                    elementTop <= (window.innerHeight || document.documentElement.clientHeight) / dividend
+                );
+            };
+            
+            const displayScrollElement = (element) => {
+                element.classList.add('active');
+            };
+            
+            const hideScrollElement = (element) => {
+                element.classList.remove('active');
+            };
+            
+            const handleScrollAnimation = () => {
+                scrollElements.forEach((el) => {
+                    if (elementInView(el, 1.25)) {
+                        displayScrollElement(el);
+                    } else {
+                        hideScrollElement(el);
+                    }
+                });
+            };
+            
+            window.addEventListener('scroll', () => {
+                handleScrollAnimation();
+            });
+            
+            // Trigger initial check
+            handleScrollAnimation();
+
+            // Back to top button
+            const backToTopBtn = document.querySelector('.back-to-top');
+            
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 700) {
+                    backToTopBtn.classList.add('show');
+                } else {
+                    backToTopBtn.classList.remove('show');
+                }
+            });
+            
+            backToTopBtn.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+
+            // Testimonials slider
+            const testimonialsTrack = document.querySelector('.testimonials-track');
+            const testimonials = document.querySelectorAll('.testimonial');
+            const prevBtn = document.querySelector('.prev-testimonial');
+            const nextBtn = document.querySelector('.next-testimonial');
+            const dots = document.querySelectorAll('.testimonial-dot');
+            
+            let currentIndex = 0;
+            
+            const updateSlider = () => {
+                testimonialsTrack.style.transform = `translateX(-${currentIndex * 100}%)`;
+                
+                // Update active dot
+                dots.forEach((dot, index) => {
+                    if (index === currentIndex) {
+                        dot.classList.add('active');
+                    } else {
+                        dot.classList.remove('active');
+                    }
+                });
+                
+                // Update active testimonial
+                testimonials.forEach((testimonial, index) => {
+                    if (index === currentIndex) {
+                        testimonial.classList.add('active');
+                    } else {
+                        testimonial.classList.remove('active');
+                    }
+                });
+            };
+            
+            prevBtn.addEventListener('click', () => {
+                currentIndex = currentIndex > 0 ? currentIndex - 1 : testimonials.length - 1;
+                updateSlider();
+            });
+            
+            nextBtn.addEventListener('click', () => {
+                currentIndex = currentIndex < testimonials.length - 1 ? currentIndex + 1 : 0;
+                updateSlider();
+            });
+            
+            dots.forEach(dot => {
+                dot.addEventListener('click', () => {
+                    currentIndex = parseInt(dot.dataset.index);
+                    updateSlider();
+                });
+            });
+            
+            // Auto slide testimonials
+            setInterval(() => {
+                currentIndex = currentIndex < testimonials.length - 1 ? currentIndex + 1 : 0;
+                updateSlider();
+            }, 5000);
+            
+            // Initialize testimonials
+            updateSlider();
+
+            // Product cards modal
+            const productCards = document.querySelectorAll('.product-card');
+            const productModal = document.querySelector('#productModal');
+            const modalClose = document.querySelector('.modal-close');
+            const modalTitle = document.querySelector('.modal-title');
+            const modalBody = document.querySelector('.modal-body');
+            
+            productCards.forEach(card => {
+                card.addEventListener('click', () => {
+                    const title = card.querySelector('.product-title').textContent;
+                    const description = card.querySelector('.product-description').textContent;
+                    
+                    modalTitle.textContent = title;
+                    modalBody.innerHTML = `
+                        <p>${description}</p>
+                        <p>Andy Stone Design oferă o gamă variată de ${title.toLowerCase()}, folosind materiale de cea mai bună calitate și tehnologii moderne de fabricație. Produsele noastre sunt rezistente la intemperii, schimbări de temperatură și sunt ușor de întreținut.</p>
+                        <p>Contactați-ne pentru a obține o ofertă personalizată pentru proiectul dumneavoastră.</p>
+                    `;
+                    
+                    productModal.classList.add('show');
+                });
+            });
+            
+            modalClose.addEventListener('click', () => {
+                productModal.classList.remove('show');
+            });
+            
+            window.addEventListener('click', (e) => {
+                if (e.target === productModal) {
+                    productModal.classList.remove('show');
+                }
+            });
+
+            // Contact form handling
+            const contactForm = document.getElementById('contactForm');
+            
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const formData = {
+                    name: document.getElementById('name').value,
+                    email: document.getElementById('email').value,
+                    phone: document.getElementById('phone').value,
+                    subject: document.getElementById('subject').value,
+                    message: document.getElementById('message').value
+                };
+                
+                // Here you would normally send the form data to a server
+                // For now, we'll just show an alert
+                alert(`Mulțumim pentru mesaj, ${formData.name}! Vă vom contacta în curând.`);
+                contactForm.reset();
+            });
+
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 100,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // Add parallax effect to the hero section
+            const heroSection = document.querySelector('.hero');
+            
+            window.addEventListener('scroll', () => {
+                const scrollPosition = window.scrollY;
+                if (scrollPosition < window.innerHeight) {
+                    heroSection.style.backgroundPositionY = `${scrollPosition * 0.5}px`;
+                }
+            });
+
+            // Create a subtle floating animation for product cards
+            productCards.forEach((card, index) => {
+                card.style.animationDelay = `${index * 0.1}s`;
+                setInterval(() => {
+                    card.style.transform = `translateY(-${5 + Math.random() * 5}px)`;
+                    setTimeout(() => {
+                        card.style.transform = 'translateY(0)';
+                    }, 1000);
+                }, 3000 + index * 1000);
+            });
+
+            // Gallery hover zoom effect
+            const galleryItems = document.querySelectorAll('.gallery-item');
+            
+            galleryItems.forEach(item => {
+                item.addEventListener('mouseenter', () => {
+                    item.style.zIndex = '10';
+                });
+                
+                item.addEventListener('mouseleave', () => {
+                    item.style.zIndex = '1';
+                });
+            });
+
+            // Add 3D tilt effect on product cards
+            productCards.forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    const cardRect = card.getBoundingClientRect();
+                    const cardCenterX = cardRect.left + cardRect.width / 2;
+                    const cardCenterY = cardRect.top + cardRect.height / 2;
+                    const mouseX = e.clientX - cardCenterX;
+                    const mouseY = e.clientY - cardCenterY;
+                    
+                    const rotateX = mouseY * -0.05;
+                    const rotateY = mouseX * 0.05;
+                    
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale(1)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
